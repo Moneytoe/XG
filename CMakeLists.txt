@@ -1,0 +1,26 @@
+CMAKE_MINIMUM_REQUIRED(3.1)
+project("XGrounds" 0.1.0.0 "EXAMPLE" C++)
+
+
+IF(MAC)
+	find_library(XSDK_LIB_XPLM XPLM "$<CURRENT_SOURCE_DIR>/SDK/Libraries/mac")
+	find_library(XSDK_LIB_XPWIDGETS XPWidgets "$<CURRENT_SOURCE_DIR/SDK/Libraries/mac")
+	
+ELSE()
+	find_library(XSDK_LIB_XPLM XPLM "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
+	find_library(XSDK_LIB_XPWIDGETS XPWidgets "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
+ENDIF()
+
+SET(XSDK_HDR_DIR_WRAPPERS "$<CURRENT_SOURCE_DIR>/SDK/CHeaders/Wrappers")
+SET(XSDK_HDR_DIR_WIDGETS "$<CURRENT_SOURCE_DIR>/SDK/CHeaders/Widgets")
+SET(XSDK_HDR_DIR_XPLM "$<CURRENT_SOURCE_DIR>/SDK/CHeaders/XPLM")
+
+
+
+Include_directories(XSDK_HDR_DIR_WRAPPERS XSDK_HDR_DIR_WIDGETS XSDK_HDR_DIR_XPLM)
+
+add_library(XGrounds SHARED)
+
+target_link_libraries(XGrounds XSDK_LIB_XPLM XSDK_LIB_XPWIDGETS)
+
+install(DESTINATION "$<CURRENT_SOURCE_DIR>/__OUTPUT")
