@@ -3,13 +3,13 @@ project("XGrounds" 0.1.0.0 "EXAMPLE" C++)
 
 
 IF(APPLE)
-	find_library(XSDK_LIB_XPLM XPLM "$<CURRENT_SOURCE_DIR>/SDK/Libraries/mac")
-	find_library(XSDK_LIB_XPWIDGETS XPWidgets "$<CURRENT_SOURCE_DIR/SDK/Libraries/mac")
+	find_library(XSDK_LIB_XPLM XPLM_64 "$<CURRENT_SOURCE_DIR>/SDK/Libraries/mac")
+	find_library(XSDK_LIB_XPWIDGETS XPWidgets_64 "$<CURRENT_SOURCE_DIR/SDK/Libraries/mac")
 	
 ELSEIF(WIN32)
-	find_library(XSDK_LIB_XPLM XPLM "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
-	find_library(XSDK_LIB_XPWIDGETS XPWidgets "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
-ELSEIF(LINUX)
+	find_library(XSDK_LIB_XPLM XPLM_64 "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
+	find_library(XSDK_LIB_XPWIDGETS XPWidgets_64 "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
+ELSEIF(UNIX)
 	
 ENDIF()
 
@@ -21,8 +21,11 @@ SET(XSDK_HDR_DIR_XPLM "$<CURRENT_SOURCE_DIR>/SDK/CHeaders/XPLM")
 
 Include_directories(XSDK_HDR_DIR_WRAPPERS XSDK_HDR_DIR_WIDGETS XSDK_HDR_DIR_XPLM)
 
+target_compiler_flags(
+
 add_library(XGrounds SHARED)
 
 target_link_libraries(XGrounds XSDK_LIB_XPLM XSDK_LIB_XPWIDGETS)
 
 install(DESTINATION "$<CURRENT_SOURCE_DIR>/__OUTPUT")
+
