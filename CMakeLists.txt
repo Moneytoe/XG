@@ -2,13 +2,15 @@ CMAKE_MINIMUM_REQUIRED(3.1)
 project("XGrounds" 0.1.0.0 "EXAMPLE" C++)
 
 
-IF(MAC)
+IF(APPLE)
 	find_library(XSDK_LIB_XPLM XPLM "$<CURRENT_SOURCE_DIR>/SDK/Libraries/mac")
 	find_library(XSDK_LIB_XPWIDGETS XPWidgets "$<CURRENT_SOURCE_DIR/SDK/Libraries/mac")
 	
-ELSE()
+ELSEIF(WIN32)
 	find_library(XSDK_LIB_XPLM XPLM "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
 	find_library(XSDK_LIB_XPWIDGETS XPWidgets "$<CURRENT_SOURCE_DIR>/SDK/Libraries/win")
+ELSEIF(LINUX)
+	
 ENDIF()
 
 SET(XSDK_HDR_DIR_WRAPPERS "$<CURRENT_SOURCE_DIR>/SDK/CHeaders/Wrappers")
